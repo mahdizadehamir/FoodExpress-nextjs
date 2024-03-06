@@ -6,12 +6,14 @@ function categories({ data }) {
 
 export default categories;
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+    const {params , query} = context;
+    console.log(query)
   const res = await fetch('http://localhost:4000');
   const data = await res.json();
 
 
-  
+
   return {
     props: { data },
   };
