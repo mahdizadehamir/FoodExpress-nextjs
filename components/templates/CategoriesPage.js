@@ -1,13 +1,19 @@
 import { useRouter } from 'next/router';
 import styles from './Categories.module.css';
-import { useState } from 'react';
-
-function CategoriesPage() {
+import { useEffect, useState } from 'react';
+import Card from '../modules/Card';
+function CategoriesPage({ data }) {
   const router = useRouter();
   const [query, setQuery] = useState({ difficulty: '', time: '' });
   const changeHandler = (e) => {
     setQuery({ ...query, [e.target.name]: e.target.value });
   };
+  useEffect(() => {
+    const { difficulty, time } = router.query;
+    if (query.difficulty !== difficulty || query.time !== time) {
+      setQuery({ difficulty, time });
+    }
+  }, []);
   const clickHandler = () => {
     router.push({
       pathname: '/categories',
@@ -25,12 +31,18 @@ function CategoriesPage() {
             <option value="Medium">Medium</option>
             <option value="Hard">Hard</option>
           </select>
-          <select value={query.cook} name="time" onChange={changeHandler}>
+          <select value={query.time} name="time" onChange={changeHandler}>
             <option value="">Cooking Time</option>
             <option value="more">More than 30 minutes</option>
             <option value="less">Less than 30 minutes</option>
           </select>
           <button onClick={clickHandler}>Search</button>
+        </div>
+        <div className={styles.cards}>
+          {!data.length ? <img src="/images/search.png" alt="Category" /> : null}
+          {data.map((food) => (
+            <Card key={food.id} {...food} />
+          ))}
         </div>
       </div>
     </div>

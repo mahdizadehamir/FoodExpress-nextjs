@@ -1,7 +1,7 @@
 import CategoriesPage from '../../components/templates/CategoriesPage';
 
 function categories({ data }) {
-  return <CategoriesPage />;
+  return <CategoriesPage data={data} />;
 }
 
 export default categories;
@@ -10,7 +10,7 @@ export async function getServerSideProps(context) {
   const { params, query } = context;
   const res = await fetch('http://localhost:4000/data');
   const data = await res.json();
-  const mappedData = data.filter((item) => {
+  const filteredData = data.filter((item) => {
     const difficultyResult = item.details.filter(
       (detail) => detail.Difficulty && detail.Difficulty === query.difficulty
     );
@@ -33,7 +33,8 @@ export async function getServerSideProps(context) {
       return item;
     }
   });
+
   return {
-    props: { data: mappedData },
+    props: { data: filteredData },
   };
 }
