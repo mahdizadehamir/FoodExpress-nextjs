@@ -12,7 +12,7 @@ function Details({ data }) {
 export default Details;
 
 export async function getStaticPaths() {
-  const res = await fetch('http://localhost:4000/data');
+  const res = await fetch('https://food-express-api-blue.vercel.app/data');
   const data = await res.json();
   const slicedData = data.slice(0, 10);
   const paths = slicedData.map((food) => ({
@@ -29,7 +29,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const { params } = context;
-  const res = await fetch(`http://localhost:4000/data/${params.id}`);
+  const res = await fetch(`https://food-express-api-blue.vercel.app/data/${params.id}`);
   const data = await res.json();
 
   if (!data.name) {
