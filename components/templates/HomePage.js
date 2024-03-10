@@ -3,7 +3,7 @@ import Banner from '../modules/Banner';
 import Companies from '../modules/Companies';
 import Guide from '../modules/Guide';
 import Instruction from '../modules/Instruction';
-import Definition from '../modules/definition';
+import Definition from '../modules/Definition';
 import Restrictions from '../modules/Restricitons';
 import styles from './HomePage.module.css';
 function HomePage() {
