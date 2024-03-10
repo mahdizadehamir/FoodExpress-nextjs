@@ -8,7 +8,7 @@ export default categories;
 
 export async function getServerSideProps(context) {
   const { params, query } = context;
-  const res = await fetch('https://food-express-api-blue.vercel.app/data');
+  const res = await fetch(`${process.env.BASE_URL}`);
   const data = await res.json();
   const filteredData = data.filter((item) => {
     const difficultyResult = item.details.filter(

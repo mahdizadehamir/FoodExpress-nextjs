@@ -7,7 +7,7 @@ function Menu({ data }) {
 export default Menu;
 
 export async function getStaticProps() {
-  const res = await fetch('https://food-express-api-blue.vercel.app/data');
+  const res = await fetch(`${process.env.BASE_URL}`);
   const data = await res.json();
 
   return {
